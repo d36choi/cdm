@@ -1,0 +1,8 @@
+-- CREATE TABLE IF NOT EXISTS uberdata (
+--     `id` BIGINT,
+--     `` VARCHAR(4) CHARACTER SET utf8,
+--     `` VARCHAR(59) CHARACTER SET utf8,
+--     `` VARCHAR(1) CHARACTER SET utf8,
+--     `` DOUBLE(10, 7),
+--     `` DOUBLE(10, 8)
+-- );
