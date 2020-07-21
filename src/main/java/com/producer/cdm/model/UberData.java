@@ -17,4 +17,5 @@ public class UberData {
     @Id
     public long id;
 
+
 }
