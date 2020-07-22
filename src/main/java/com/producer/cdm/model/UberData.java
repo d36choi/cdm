@@ -19,33 +19,31 @@ import java.time.LocalDateTime;
 @Entity
 public class UberData {
 
+
+//    @Column(nullable = false)
     @Id
-    @GeneratedValue
-    private long id;
+    private String startDate;
 
-    @Column(nullable = false)
-    private LocalDateTime startDate;
+//    @Column(nullable = false)
+    private String endDate;
 
-    @Column(nullable = false)
-    private LocalDateTime endDate;
-
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String category;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String startLocation;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String stopLocation;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private Double miles;
 
     private String purpose;
 
 
     @Builder
-    public UberData(LocalDateTime startDate, LocalDateTime endDate, String category, String startLocation,
+    public UberData(String startDate, String endDate, String category, String startLocation,
                     String stopLocation, Double miles, String purpose){
         this.startDate = startDate;
         this.endDate = endDate;
