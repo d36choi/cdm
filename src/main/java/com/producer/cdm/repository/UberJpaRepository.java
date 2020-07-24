@@ -9,6 +9,4 @@ import java.util.Optional;
 
 
 public interface UberJpaRepository extends JpaRepository<UberData,Long> {
-
-
 }
