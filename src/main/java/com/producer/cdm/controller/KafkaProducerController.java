@@ -6,9 +6,12 @@ import com.producer.cdm.repository.UberJpaRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.kafka.core.KafkaTemplate;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -16,17 +19,21 @@ public class KafkaProducerController {
 
     @Autowired
     KafkaTemplate<String,Object> kafkaTemplate;
-    @Autowired
-    UberJpaRepository uberJpaRepository;
 
-    private int id = 1;
-    private static final String TOPICNAME = "cdm-test";
+    private static final String TOPICNAME = "test";
 
-    @GetMapping("/publish")
-    public String post()
+    @RequestMapping("/publish")
+    @ResponseBody
+    public HashMap<String, Object> post(@RequestBody Map<String,Object> map)
     {
-        String return_msg = "data"+id+" is published";
-        kafkaTemplate.send(TOPICNAME, uberJpaRepository.findAll().get(id++));
-        return return_msg;
+        HashMap<String,Object> res = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+        for( Map.Entry<String, Object> elem : map.entrySet() ){
+            sb.append(elem.getKey());
+            log.info("send... "+elem);
+            kafkaTemplate.send(TOPICNAME, elem);
+        }
+        res.put("Success",map);
+        return res;
     }
 }
