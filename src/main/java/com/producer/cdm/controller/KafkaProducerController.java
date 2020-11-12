@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.kafka.core.KafkaTemplate;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -23,12 +24,16 @@ public class KafkaProducerController {
 
     @RequestMapping("/publish")
     @ResponseBody
-    public String post(@RequestBody Map<String,Object> map)
+    public HashMap<String, Object> post(@RequestBody Map<String,Object> map)
     {
+        HashMap<String,Object> res = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
         for( Map.Entry<String, Object> elem : map.entrySet() ){
-
+            sb.append(elem.getKey());
+            log.info("send... "+elem);
             kafkaTemplate.send(TOPICNAME, elem);
         }
-        return "data is published!";
+        res.put("Success",map);
+        return res;
     }
 }
