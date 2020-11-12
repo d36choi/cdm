@@ -18,8 +18,6 @@ public class KafkaProducerController {
 
     @Autowired
     KafkaTemplate<String,Object> kafkaTemplate;
-    @Autowired
-    UberJpaRepository uberJpaRepository;
 
     private static final String TOPICNAME = "test";
 
