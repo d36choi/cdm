@@ -20,20 +20,21 @@ public class KafkaProducerController {
     @Autowired
     KafkaTemplate<String,Object> kafkaTemplate;
 
-    private static final String TOPICNAME = "test";
 
-    @RequestMapping("/publish")
+    @PostMapping("/publish")
     @ResponseBody
-    public HashMap<String, Object> post(@RequestBody Map<String,Object> map)
+    public HashMap<String, Object> post(@RequestParam String topic, @RequestBody Map<String,Object> map)
     {
         HashMap<String,Object> res = new HashMap<>();
         StringBuilder sb = new StringBuilder();
         for( Map.Entry<String, Object> elem : map.entrySet() ){
             sb.append(elem.getKey());
             log.info("send... "+elem);
-            kafkaTemplate.send(TOPICNAME, elem);
+            kafkaTemplate.send(topic, elem);
         }
+        res.put("topic",topic);
         res.put("Success",map);
+
         return res;
     }
 }
