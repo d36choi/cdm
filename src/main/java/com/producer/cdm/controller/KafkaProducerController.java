@@ -21,8 +21,8 @@ public class KafkaProducerController {
     @Autowired
     KafkaTemplate<String,Object> kafkaTemplate;
 
-    HashSet<String> topicList = new HashSet<>(Arrays.asList("car_spec","user_info",
-            "user_license","reservation","otp","test"));
+//    HashSet<String> topicList = new HashSet<>(Arrays.asList("car_spec","user_info",
+//            "user_license","reservation","otp","test","test1"));
 
     @PostMapping("/publish")
     @ResponseBody
@@ -30,11 +30,11 @@ public class KafkaProducerController {
     {
         HashMap<String,Object> res = new HashMap<>();
 
-        if (!topicList.contains(topic)) {
-            res.put("error","wrong topic name");
-            log.error("wrong topic name taken");
-            return new ResponseEntity<>(res, HttpStatus.BAD_REQUEST);
-        }
+//        if (!topicList.contains(topic)) {
+//            res.put("error","wrong topic name");
+//            log.error("wrong topic name taken");
+//            return new ResponseEntity<>(res, HttpStatus.BAD_REQUEST);
+//        }
         log.info("send... "+map);
         kafkaTemplate.send(topic,map);
 //        for( Map.Entry<String, Object> elem : map.entrySet() ){
